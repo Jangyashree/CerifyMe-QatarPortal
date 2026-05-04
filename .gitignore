@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pyo
+admin_portal.db
+*.db
+.env
+.venv/
+venv/
