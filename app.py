@@ -12,7 +12,7 @@ app.secret_key = 'qatar-foundation-secret-key-2024'
 DB_PATH = os.path.join(os.path.dirname(__file__), 'admin_portal.db')
 
 
-# ─── DATABASE SETUP ─────────────────────────────────────────────────────────────
+# ─── DATABASE SETUP ───
 
 def get_db():
     conn = sqlite3.connect(DB_PATH)
@@ -61,7 +61,7 @@ def init_db():
     conn.close()
 
 
-# ─── AUTH DECORATOR ──────────────────────────────────────────────────────────────
+# ─── AUTH DECORATOR ───
 
 def login_required(f):
     @wraps(f)
@@ -72,7 +72,7 @@ def login_required(f):
     return decorated
 
 
-# ─── SERVE FRONTEND FILES ────────────────────────────────────────────────────────
+# ─── SERVE FRONTEND FILES ───
 
 @app.route('/')
 def index():
@@ -83,7 +83,7 @@ def static_files(filename):
     return send_from_directory('sky', filename)
 
 
-# ─── SIGNUP ──────────────────────────────────────────────────────────────────────
+# ─── SIGNUP ───
 
 @app.route('/api/signup', methods=['POST'])
 def signup():
@@ -115,7 +115,7 @@ def signup():
     return jsonify({'success': True, 'message': 'Account created successfully'}), 201
 
 
-# ─── LOGIN ───────────────────────────────────────────────────────────────────────
+# ─── LOGIN ───
 
 @app.route('/api/login', methods=['POST'])
 def login():
@@ -151,7 +151,7 @@ def login():
     })
 
 
-# ─── LOGOUT ──────────────────────────────────────────────────────────────────────
+# ─── LOGOUT ───
 
 @app.route('/api/logout', methods=['POST'])
 def logout():
@@ -159,7 +159,7 @@ def logout():
     return jsonify({'success': True, 'message': 'Logged out'})
 
 
-# ─── FORGOT PASSWORD ─────────────────────────────────────────────────────────────
+# ─── FORGOT PASSWORD ───
 
 @app.route('/api/forgot-password', methods=['POST'])
 def forgot_password():
@@ -204,7 +204,7 @@ def reset_password_page(token):
     return '<h2>Reset link is valid.</h2><p>(Password reset form can be added here.)</p>'
 
 
-# ─── OPPORTUNITIES ───────────────────────────────────────────────────────────────
+# ─── OPPORTUNITIES ───
 
 def row_to_dict(row):
     d = dict(row)
@@ -364,10 +364,10 @@ def delete_opportunity(opp_id):
     return jsonify({'success': True, 'message': 'Opportunity deleted successfully'})
 
 
-# ─── START ───────────────────────────────────────────────────────────────────────
+# ─── START ───
 
 if __name__ == '__main__':
     init_db()
-    print('Database ready.')
-    print('Open http://localhost:5000 in your browser.')
+    print('Database connected.')
+    print('Server is running on  http://localhost:5000')
     app.run(debug=True)
